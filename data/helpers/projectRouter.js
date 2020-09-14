@@ -9,10 +9,10 @@ router.post("/",  (req, res) => {
 
     projectModel
         .insert(projectInfo)
-        .then(() => {
-            res.status(201).json({ message: "Project was created." })
-        })
-})
+        .then((project) => {
+            res.status(201).json([{ message: "Project was created.", project }])
+        });
+});
 
 //Read
 router.get("/", (req, res) => {
@@ -24,8 +24,22 @@ router.get("/", (req, res) => {
         .catch(error => {
             console.log(error);
             res.status(500).json({ message: "Error getting projects." })
+        });
+});
+
+router.get("/:id", (req, res) => {
+    projectModel
+        .get(req.params.id)
+        .then(e => {
+            res.status(200).json(e)
         })
-})
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ message: "Error getting project." })
+        });
+});
+
+
 
 //Update
 router.put("/:id", (req, res) => {
@@ -43,8 +57,8 @@ router.put("/:id", (req, res) => {
         })
         .catch(error => {
             res.status(500).json({ message: "There was an error updating the project." })
-        })
-})
+        });
+});
 
 //Delete
 router.delete("/:id", (req, res) => {
@@ -62,7 +76,7 @@ router.delete("/:id", (req, res) => {
         .catch(error => {
             console.log(error);
             res.status(500).json({ message: "Error deleting the project." })
-        })
-})
+        });
+});
 
 module.exports = router;

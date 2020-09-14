@@ -1,8 +1,9 @@
 const express = require('express');
 
-const projectRouter = require('./data/helpers/projectRouter')
+const projectRouter = require('./data/helpers/projectRouter');
+const actionRouter = require('./data/helpers/actionRouter')
 
-const helmet = require('helmet')
+const helmet = require('helmet');
 
 const server = express();
 
@@ -13,6 +14,7 @@ server.get("/", (req, res) => {
     res.status(200).json({ message: "The server is online." })
 })
 
-server.use("/api/projects", projectRouter)
+server.use("/api/projects", projectRouter);
+server.use("/api/actions", actionRouter);
 
 module.exports = server;
