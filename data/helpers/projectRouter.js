@@ -82,8 +82,10 @@ router.delete("/:id", (req, res) => {
 
 //GET ACTIONS FOR SPECIFIC PROJECT
 router.get("/:id/actions", (req, res) => {
+    const { id } = req.params
+
     projectModel
-    .getProjectActions(req.params.id)
+    .getProjectActions(id)
     .then(e => {
         res.status(200).json(e)
     })
