@@ -79,4 +79,17 @@ router.delete("/:id", (req, res) => {
         });
 });
 
+
+//GET ACTIONS FOR SPECIFIC PROJECT
+router.get("/:id/actions", (req, res) => {
+    projectModel
+    .getProjectActions(req.params.id)
+    .then(e => {
+        res.status(200).json(e)
+    })
+    .catch(error => {
+        res.status(500).json({ message: "Error retrieving actions for this project" })
+    })
+})
+
 module.exports = router;
